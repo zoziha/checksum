@@ -1,5 +1,5 @@
 name = "checksum"
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 author = "ZUO Zhihua"
 maintainer = "zuo.zhihua@qq.com"
@@ -18,4 +18,3 @@ library = false
 implicit-typing = false
 implicit-external = false
 source-form = "free"
-

@@ -35,17 +35,13 @@ contains
     function read_whole_file(file) result(string)
         character(*), intent(in) :: file  !! file name to read
         character(:), allocatable :: string  !! file content
-        integer :: iunit, len, stat, i
+        integer :: iunit, len
 
-        open (newunit=iunit, file=file, status='old', action='read')
+        open (newunit=iunit, file=file, status='old', action='read', access='stream', form='unformatted')
+
         inquire (iunit, size=len)
         allocate (character(len=len) :: string)
-
-        do i = 1, len - 1
-            read (iunit, '(a1)', advance='no', iostat=stat) string(i:i)
-            if (is_iostat_eor(stat)) string(i:i) = char(10)  !! line feed
-        end do
-        string(len:len) = char(0)  !! null character
+        read (iunit) string  ! use binary read to read the whole file faster
 
         close (iunit)
 
